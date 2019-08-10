@@ -77,9 +77,6 @@ prevButtons.forEach(el => {
 
 });
 
-
-
-
 /**
  * render out errors
  *
