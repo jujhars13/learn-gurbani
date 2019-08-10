@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "GurbaniAkharHeavy";
+  src: url('./fonts/gurbani-akhar-heavy.ttf');
+}
+
+.gurmukhi {
+  font-family: GurbaniAkharHeavy;
+}
