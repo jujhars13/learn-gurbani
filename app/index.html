@@ -3,25 +3,32 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
   <title>Sukhmani</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="css/styles.css" media="screen">
   <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
 </head>
 
 <body>
+  <div class="container-fluid">
 
-  <div class='section-number' id='section-number'></div>
+    <h1>Sukhmani</h1>
+    <div class='section-number' id='section-number'></div>
 
-  <button class='prev-button'>Back</button>
-  <button class='next-button'>Next</button>
+    <button class='btn btn-secondary btn-lg prev-button'>Back</button>
+    <button class='btn btn-primary btn-lg next-button'>Next</button>
 
-  <div class='bani gurmukhi' id='bani'></div>
+    <div class='bani gurmukhi' id='bani'></div>
 
-  <button class='prev-button'>Back</button>
-  <button class='next-button'>Next</button>
+    <button class='btn btn-secondary btn-lg prev-button'>Back</button>
+    <button class='btn btn-primary btn-lg next-button'>Next</button>
+  </div>
 
-  <div class='debug' id='debug'></div>
+  <div class="alert alert-warning" role="alert" id='debug'></div>
 
   <script src="js/scripts.js" data-rel-js></script>
 </body>

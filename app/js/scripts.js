@@ -63,13 +63,18 @@ nextButtons.forEach(el => {
 });
 const prevButtons = Array.from(document.getElementsByClassName("prev-button"));
 prevButtons.forEach(el => {
-  el.addEventListener("click", () => {
+
+  if (section <= 1) {
+    el.classList.add('disabled');
+  }
+  else {
     let prevSection = section - 1;
-    if (prevSection < 1) {
-      prevSection = 1;
-    }
-    window.location.replace(`?b=${bani}&s=${prevSection}`);
-  });
+    el.classList.remove('disabled');
+    el.addEventListener("click", () => {
+      window.location.replace(`?b=${bani}&s=${prevSection}`);
+    });
+  }
+
 });
 
 
