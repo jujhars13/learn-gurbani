@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+
+  # nginx reverse web proxy for https
+  nginx:
+    image: nginx:1.17
+    ports:
+      - "80:80"
+    volumes:
+      - ./app:/usr/share/nginx/html:ro
