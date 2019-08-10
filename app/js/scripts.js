@@ -21,7 +21,7 @@ function initialize() {
   }
 
   // load gurmukhi from relevant text file
-  return fetch(`js/${bani}/${section}.txt`)
+  return fetch(`content/${bani}/${section}.txt`)
     .then(response => {
       if (!response.ok) {
         throw new Error("HTTP error " + response.status);
