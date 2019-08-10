@@ -18,6 +18,7 @@ function initialize() {
   state.bani = bani;
   console.log(state);
 
+  // load gurmukhi from relevant json file
   return fetch(`js/${bani}.json`)
     .then(response => {
       if (!response.ok) {
@@ -39,14 +40,10 @@ function render(state) {
   console.log(state);
   console.log(baniBlob);
   document.getElementById('pageNumber').innerText = state.pageNumber;
-
   document.getElementById('bani').innerText = baniBlob.content[state.pageNumber];
 }
 
-
-
 function handleNextButtonClick() {
-  /* mutate state */
   if (state.pageNumber === false) {
     state.pageNumber = 1;
   }
@@ -58,6 +55,8 @@ function handleNextButtonClick() {
 }
 
 document.getElementById('next').addEventListener("click", handleNextButtonClick);
+document.getElementById("back").addEventListener("click", () => window.history.back());
+
 window.onpopstate = function (event) {
   if (event.state) { state = event.state; }
   render(state);
