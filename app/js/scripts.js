@@ -1,6 +1,7 @@
-let state = { pageNumber: false };
-const urlParams = new URLSearchParams(window.location.search);
-let baniBlob = false;
+const parsedUrl = new URL(window.location.href);
+const bani = parsedUrl.searchParams.get('b') || 'sukhmani';
+const section = Number(parsedUrl.searchParams.get('s')) || 1;
+const validGurbani = ['sukhmani'];
 
 (function ready(fn) {
   if (document.readyState != 'loading') {
@@ -11,53 +12,76 @@ let baniBlob = false;
 })();
 
 /**
- * setup the page and state
+ * setup the page and grab the next json
  */
 function initialize() {
-  let bani = urlParams.get('b') || 'sukhmani';
-  state.bani = bani;
-  console.log(state);
+  if (!validGurbani.includes(bani)) {
+    renderError('error', `we don\'t have ${bani}`);
+    return false;
+  }
 
-  // load gurmukhi from relevant json file
-  return fetch(`js/${bani}.json`)
+  // load gurmukhi from relevant text file
+  return fetch(`js/${bani}/${section}.txt`)
     .then(response => {
       if (!response.ok) {
         throw new Error("HTTP error " + response.status);
       }
-      return response.json();
+      return response.text();
     })
     .then(body => {
-      baniBlob = body;
-      window.history.replaceState(state, null, "");
+      let state = {
+        content: body,
+        bani,
+        section,
+      };
       render(state);
     })
     .catch(err => {
-      console.error(err);
+      renderError('error', JSON.stringify(err));
     });
 }
 
+/**
+ * render the Gurbani
+ * @param {} state 
+ */
 function render(state) {
   console.log(state);
-  console.log(baniBlob);
-  document.getElementById('pageNumber').innerText = state.pageNumber;
-  document.getElementById('bani').innerText = baniBlob.content[state.pageNumber];
+  document.getElementById('section-number').innerText = state.section;
+  document.getElementById('bani').innerText = state.content;
 }
 
-function handleNextButtonClick() {
-  if (state.pageNumber === false) {
-    state.pageNumber = 1;
-  }
-  else {
-    state.pageNumber++;
-  }
-  window.history.pushState(state, null, "");
-  render(state);
+/**
+ * button handlers
+ */
+const nextButtons = Array.from(document.getElementsByClassName('next-button'));
+nextButtons.forEach(el => {
+  el.addEventListener("click", () => {
+    let nextSection = section + 1;
+    window.location.replace(`?b=${bani}&s=${nextSection}`);
+  });
+});
+const prevButtons = Array.from(document.getElementsByClassName("prev-button"));
+prevButtons.forEach(el => {
+  el.addEventListener("click", () => {
+    let prevSection = section - 1;
+    if (prevSection < 1) {
+      prevSection = 1;
+    }
+    window.location.replace(`?b=${bani}&s=${prevSection}`);
+  });
+});
+
+
+
+
+/**
+ * render out errors
+ *
+ * @param {string} level
+ * @param {string} msg
+ */
+function renderError(level, msg) {
+  console.error(msg);
+  document.getElementById('debug').innerText = msg;
 }
-
-document.getElementById('next').addEventListener("click", handleNextButtonClick);
-document.getElementById("back").addEventListener("click", () => window.history.back());
-
-window.onpopstate = function (event) {
-  if (event.state) { state = event.state; }
-  render(state);
-};  
