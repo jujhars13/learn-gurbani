@@ -85,5 +85,8 @@ prevButtons.forEach(el => {
  */
 function renderError(level, msg) {
   console.error(msg);
-  document.getElementById('debug').innerText = msg;
+
+  const el = document.getElementById('debug');
+  el.classList.remove('d-none');
+  el.innerText = msg;
 }
