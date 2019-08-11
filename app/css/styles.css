@@ -6,4 +6,9 @@
 .gurmukhi {
   font-family: GurbaniAkharHeavy;
   font-size: xx-large;
+  color:whitesmoke;
+}
+
+.bani{
+  padding:30px;
 }
