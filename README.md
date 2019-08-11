@@ -8,5 +8,5 @@ Uses querystrings to save state and so your position won't be lost when in your 
 ## Todo
 - [x] populate gurmukhi json
 - [x] test on iphone
-- [ ] sort out layout
+- [x] sort out layout
 - [x] deploy
