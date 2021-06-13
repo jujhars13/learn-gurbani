@@ -4,8 +4,8 @@ services:
 
   # nginx reverse web proxy for https
   nginx:
-    image: nginx:1.17
+    image: nginx:1.19
     ports:
       - "80:80"
     volumes:
-      - ./app:/usr/share/nginx/html:ro
+      - ./docs:/usr/share/nginx/html:ro
